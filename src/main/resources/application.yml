@@ -1,0 +1,11 @@
+server:
+    port: 8181
+    servlet:
+        context-path: /v1
+spring:
+    jpa:
+        show-sql: true
+logging:
+    level:
+        org:
+            springframework: off
