@@ -19,4 +19,6 @@ public class Foo {
 
     private Integer quantity;
 
+    private Double value;
+
 }

@@ -1,7 +1,9 @@
 package com.example.api.controller;
 
 import com.example.api.dto.FooDTO;
+import com.example.api.dto.FooPartialUpdateDTO;
 import com.example.api.dto.FooResponseDTO;
+import com.example.api.dto.FooUpdateDTO;
 import com.example.api.entity.Foo;
 import com.example.api.service.FooService;
 import com.example.api.util.Converter;
@@ -39,15 +41,15 @@ public class FooController {
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<FooResponseDTO> put(@PathVariable("id") Long id, @Valid @RequestBody FooDTO fooDTO) {
-        Foo foo = converter.map(fooDTO, Foo.class);
+    public ResponseEntity<FooResponseDTO> put(@PathVariable("id") Long id, @Valid @RequestBody FooUpdateDTO fooUpdateDTO) {
+        Foo foo = converter.map(fooUpdateDTO, Foo.class);
         foo.setId(id);
         return  ResponseEntity.ok(converter.map(fooService.update(foo), FooResponseDTO.class));
     }
 
     @PatchMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<FooResponseDTO> patch(@PathVariable("id") Long id, @Valid @RequestBody FooDTO fooDTO) {
-        Foo foo = converter.map(fooDTO, Foo.class);
+    public ResponseEntity<FooResponseDTO> patch(@PathVariable("id") Long id, @Valid @RequestBody FooPartialUpdateDTO fooPartialUpdateDTO) {
+        Foo foo = converter.map(fooPartialUpdateDTO, Foo.class);
         foo.setId(id);
         return  ResponseEntity.ok(converter.map(fooService.partialUpdate(foo), FooResponseDTO.class));
     }
