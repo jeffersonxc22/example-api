@@ -1,4 +1,4 @@
-package com.example.api.dto;
+package com.example.api.dto.request;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -6,15 +6,11 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 
 @Data
-@NoArgsConstructor
-public class FooDTO {
+public class FooRequest extends GenericRequest {
 
-    @NotNull
     private String env;
 
-    @NotNull
     private Integer quantity;
-
 
     private Double value;
 }

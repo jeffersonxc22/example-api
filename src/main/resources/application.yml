@@ -1,7 +1,7 @@
 server:
     port: 8181
     servlet:
-        context-path: /api/v1
+        context-path: /v1/api
 spring:
     jpa:
         show-sql: true
@@ -9,3 +9,10 @@ logging:
     level:
         org:
             springframework: off
+springdoc:
+    swagger-ui:
+        path: index.html
+    api-docs:
+        path: /docs
+        enabled: true
+

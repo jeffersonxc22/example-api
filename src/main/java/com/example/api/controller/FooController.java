@@ -1,13 +1,15 @@
 package com.example.api.controller;
 
-import com.example.api.dto.FooDTO;
-import com.example.api.dto.FooPartialUpdateDTO;
-import com.example.api.dto.FooResponseDTO;
-import com.example.api.dto.FooUpdateDTO;
+import com.example.api.dto.persist.FooPersist;
+import com.example.api.dto.response.FooResponse;
+import com.example.api.dto.update.FooPartialUpdate;
+import com.example.api.dto.update.FooUpdate;
 import com.example.api.entity.Foo;
 import com.example.api.service.FooService;
 import com.example.api.util.Converter;
 import com.example.api.util.Paths;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, value =  Paths.FOO_VALUE)
+@Tag(name = "Foo")
 public class FooController {
 
     private final FooService fooService;
@@ -26,32 +29,33 @@ public class FooController {
     private final Converter converter;
 
     @GetMapping
-    public ResponseEntity<List<FooResponseDTO>> get() {
-        return ResponseEntity.ok(converter.mapAll(fooService.findAll(), FooResponseDTO.class));
+    public ResponseEntity<List<FooResponse>> get() {
+        return ResponseEntity.ok(converter.mapAll(fooService.findAll(), FooResponse.class));
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<FooResponseDTO> get(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(converter.map(fooService.find(id), FooResponseDTO.class));
+    public ResponseEntity<FooResponse> get(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(converter.map(fooService.find(id), FooResponse.class));
     }
 
     @PostMapping
-    public ResponseEntity<FooResponseDTO> post(@Valid @RequestBody FooDTO fooDTO) {
-        return ResponseEntity.ok(converter.map(fooService.save(converter.map(fooDTO, Foo.class)), FooResponseDTO.class));
+    public ResponseEntity<FooResponse> post(@Valid @RequestBody FooPersist fooPersist) {
+        return ResponseEntity.ok(converter.map(fooService.save(converter.map(fooPersist, Foo.class)), FooResponse.class));
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<FooResponseDTO> put(@PathVariable("id") Long id, @Valid @RequestBody FooUpdateDTO fooUpdateDTO) {
-        Foo foo = converter.map(fooUpdateDTO, Foo.class);
+    public ResponseEntity<FooResponse> put(@PathVariable("id") Long id, @Valid @RequestBody FooUpdate fooUpdate) {
+        Foo foo = converter.map(fooUpdate, Foo.class);
         foo.setId(id);
-        return  ResponseEntity.ok(converter.map(fooService.update(foo), FooResponseDTO.class));
+        return  ResponseEntity.ok(converter.map(fooService.update(foo), FooResponse.class));
     }
 
+
     @PatchMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<FooResponseDTO> patch(@PathVariable("id") Long id, @Valid @RequestBody FooPartialUpdateDTO fooPartialUpdateDTO) {
-        Foo foo = converter.map(fooPartialUpdateDTO, Foo.class);
+    public ResponseEntity<FooResponse> patch(@PathVariable("id") Long id, @Valid @RequestBody FooPartialUpdate fooPartialUpdate) {
+        Foo foo = converter.map(fooPartialUpdate, Foo.class);
         foo.setId(id);
-        return  ResponseEntity.ok(converter.map(fooService.partialUpdate(foo), FooResponseDTO.class));
+        return  ResponseEntity.ok(converter.map(fooService.partialUpdate(foo), FooResponse.class));
     }
 
     @DeleteMapping(value = "/{id}")
