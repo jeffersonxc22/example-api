@@ -8,7 +8,6 @@ import com.example.api.entity.Foo;
 import com.example.api.service.FooService;
 import com.example.api.util.Converter;
 import com.example.api.util.Paths;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;

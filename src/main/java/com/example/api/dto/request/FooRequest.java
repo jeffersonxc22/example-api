@@ -1,11 +1,10 @@
 package com.example.api.dto.request;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotNull;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class FooRequest extends GenericRequest {
 
     private String env;

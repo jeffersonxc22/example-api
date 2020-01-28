@@ -1,7 +1,6 @@
 package com.example.api.dto.update;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
