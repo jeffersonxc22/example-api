@@ -58,7 +58,7 @@ public class FooController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity delete(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         fooService.delete(id);
         return ResponseEntity.noContent().build();
     }
