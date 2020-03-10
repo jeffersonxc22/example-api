@@ -13,6 +13,4 @@ public class FooPersist {
     @NotNull
     private Integer quantity;
 
-    @NotNull
-    private Double value;
 }
