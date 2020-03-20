@@ -11,7 +11,7 @@ logging:
             springframework: off
 springdoc:
     swagger-ui:
-        path: index.html
+        path: /
     api-docs:
         path: /docs
         enabled: true
