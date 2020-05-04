@@ -29,8 +29,6 @@ public class FooServiceTest {
         fooService.save(null);
     }
 
-    @Test
-    public void whenFindAllElements() {
-    }
+
 
 }

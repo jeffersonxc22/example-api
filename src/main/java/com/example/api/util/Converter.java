@@ -5,10 +5,8 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-import java.security.InvalidParameterException;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -35,24 +33,15 @@ public class Converter {
 
 
     private <S, D> void map(S source, D destiny, ModelMapper modelMapper) {
-        Optional.ofNullable(source).orElseThrow(InvalidParameterException::new);
-        Optional.ofNullable(destiny).orElseThrow(InvalidParameterException::new);
-        Optional.ofNullable(modelMapper).orElseThrow(InvalidParameterException::new);
         modelMapper.map(source, destiny);
     }
 
     private <S, D> D map(S source, Class<D> destinationType, ModelMapper modelMapper) {
-        Optional.ofNullable(source).orElseThrow(InvalidParameterException::new);
-        Optional.ofNullable(destinationType).orElseThrow(InvalidParameterException::new);
-        Optional.ofNullable(modelMapper).orElseThrow(InvalidParameterException::new);
         return modelMapper.map(source, destinationType);
     }
 
 
     private <S, D> List<D> mapAll(Collection<S> sources, Class<D> destinationType, ModelMapper modelMapper) {
-        Optional.ofNullable(sources).orElseThrow(InvalidParameterException::new);
-        Optional.ofNullable(destinationType).orElseThrow(InvalidParameterException::new);
-        Optional.ofNullable(modelMapper).orElseThrow(InvalidParameterException::new);
         return  sources.parallelStream().map( element -> modelMapper.map(element, destinationType)).collect(Collectors.toList());
     }
 
