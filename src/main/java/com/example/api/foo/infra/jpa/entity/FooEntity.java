@@ -1,16 +1,14 @@
-package com.example.api.entity;
+package com.example.api.foo.infra.jpa.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-public class Foo {
+@Table(name = "FOO")
+public class FooEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
