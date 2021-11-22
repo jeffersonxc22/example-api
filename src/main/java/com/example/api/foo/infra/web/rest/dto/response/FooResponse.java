@@ -18,4 +18,6 @@ public class FooResponse {
     private Integer quantity;
 
     private LocalDateTime created;
+
+
 }
